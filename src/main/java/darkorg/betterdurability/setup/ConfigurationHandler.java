@@ -3,13 +3,13 @@ package darkorg.betterdurability.setup;
 import com.google.common.collect.ImmutableList;
 import darkorg.betterdurability.BetterDurability;
 import darkorg.betterdurability.util.VanillaDamageableType;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 import java.util.HashSet;
 import java.util.List;
@@ -44,7 +44,7 @@ public class ConfigurationHandler {
     }
 
     @SubscribeEvent
-    public static void onLoad(final ModConfig.Loading configEvent) {
+    public static void onLoad(final ModConfigEvent.Loading configEvent) {
         BetterDurability.LOGGER.info("Loading config ...");
         loadEnumList(VanillaDamageableType.Category.class, DISABLED_CATEGORY_NAMES.get(), DISABLED_CATEGORIES);
         loadEnumList(VanillaDamageableType.class, DISABLED_TYPE_NAMES.get(), DISABLED_TYPES);
@@ -52,7 +52,7 @@ public class ConfigurationHandler {
     }
 
     @SubscribeEvent
-    public static void onReload(final ModConfig.Reloading configEvent) {
+    public static void onReload(final ModConfigEvent.Reloading configEvent) {
         BetterDurability.LOGGER.info("Reloading config ...");
         reloadEnumList(VanillaDamageableType.Category.class, DISABLED_CATEGORY_NAMES.get(), DISABLED_CATEGORIES);
         reloadEnumList(VanillaDamageableType.class, DISABLED_TYPE_NAMES.get(), DISABLED_TYPES);

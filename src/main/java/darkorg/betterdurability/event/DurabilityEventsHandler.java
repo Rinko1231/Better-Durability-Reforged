@@ -4,7 +4,7 @@ package darkorg.betterdurability.event;
 import darkorg.betterdurability.BetterDurability;
 import darkorg.betterdurability.setup.ConfigurationHandler;
 import darkorg.betterdurability.util.VanillaDamageableType;
-import net.minecraft.item.Item;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 

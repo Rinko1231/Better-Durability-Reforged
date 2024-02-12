@@ -1,7 +1,7 @@
 package darkorg.betterdurability.event;
 
 import darkorg.betterdurability.BetterDurability;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
@@ -13,7 +13,7 @@ public class ForgeEventsHandler {
     @SubscribeEvent
     public static void onLeftClickBlock(PlayerEvent.BreakSpeed event) {
         if (event.getState().getBlock().getSpeedFactor() != 0.0F) {
-            ItemStack targetStack = event.getPlayer().getMainHandItem();
+            ItemStack targetStack = event.getEntity().getMainHandItem();
             if (!targetStack.isDamageableItem()) return;
             boolean canFunction = ItemDurabilityEvent.ItemUsage.check(targetStack,
                     ItemDurabilityEvent.ItemUsage.Type.TOOL_LEFT_CLICK_BLOCK);
@@ -23,7 +23,7 @@ public class ForgeEventsHandler {
 
     @SubscribeEvent
     public static void onLeftClickEntity(AttackEntityEvent event) {
-        ItemStack targetStack = event.getPlayer().getMainHandItem();
+        ItemStack targetStack = event.getEntity().getMainHandItem();
         if (!targetStack.isDamageableItem()) return;
         boolean canFunction = ItemDurabilityEvent.ItemUsage.check(targetStack,
                 ItemDurabilityEvent.ItemUsage.Type.TOOL_LEFT_CLICK_ENTITY);

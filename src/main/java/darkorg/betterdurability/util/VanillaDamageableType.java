@@ -1,7 +1,7 @@
 package darkorg.betterdurability.util;
 
-import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.*;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.*;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -76,25 +76,25 @@ public enum VanillaDamageableType {
     },
     HELMET(Category.ARMOR, 2, 1) {
         public boolean isItemThisType(Item item) {
-            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlotType.HEAD;
+            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlot.HEAD;
         }
     },
     CHESTPLATE(Category.ARMOR, 2, 1) {
         @Override
         public boolean isItemThisType(Item item) {
-            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlotType.CHEST;
+            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlot.CHEST;
         }
     },
     LEGGINGS(Category.ARMOR, 2, 1) {
         @Override
         public boolean isItemThisType(Item item) {
-            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlotType.LEGS;
+            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlot.LEGS;
         }
     },
     BOOTS(Category.ARMOR, 2, 1) {
         @Override
         public boolean isItemThisType(Item item) {
-            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlotType.FEET;
+            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlot.FEET;
         }
     },
     SHIELD(Category.SHIELD, 4, 2) {
