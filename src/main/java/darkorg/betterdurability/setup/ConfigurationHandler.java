@@ -4,12 +4,15 @@ import com.google.common.collect.ImmutableList;
 import darkorg.betterdurability.BetterDurability;
 import darkorg.betterdurability.util.VanillaDamageableType;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.HashSet;
 import java.util.List;
@@ -59,11 +62,16 @@ public class ConfigurationHandler {
         reloadItemIdList(BLACKLISTED_ITEM_IDS.get(), BLACKLISTED_ITEMS);
     }
 
-    @SuppressWarnings("deprecation")
     private static void loadItemIdList(final List<? extends String> src, final Set<Item> dst) {
         for (String itemId : src) {
-            Item item = Registry.ITEM.getOptional(ResourceLocation.of(itemId, ':')).orElse(null);
-            if (item == null) {
+            ResourceLocation itemLocation = ResourceLocation.tryParse(itemId);
+            if (itemLocation == null) {
+                BetterDurability.LOGGER.error("Invalid ResourceLocation format for item {}", itemId);
+                continue;
+            }
+
+            Item item = ForgeRegistries.ITEMS.getValue(itemLocation);
+            if (item == null || item == Items.AIR) {
                 BetterDurability.LOGGER.error("Trying to blacklist item {} but it does not exist ...", itemId);
             } else {
                 dst.add(item);

@@ -76,25 +76,25 @@ public enum VanillaDamageableType {
     },
     HELMET(Category.ARMOR, 2, 1) {
         public boolean isItemThisType(Item item) {
-            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlot.HEAD;
+            return item instanceof ArmorItem armorItem && armorItem.getEquipmentSlot() == EquipmentSlot.HEAD;
         }
     },
     CHESTPLATE(Category.ARMOR, 2, 1) {
         @Override
         public boolean isItemThisType(Item item) {
-            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlot.CHEST;
+            return item instanceof ArmorItem armorItem && armorItem.getEquipmentSlot() == EquipmentSlot.CHEST;
         }
     },
     LEGGINGS(Category.ARMOR, 2, 1) {
         @Override
         public boolean isItemThisType(Item item) {
-            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlot.LEGS;
+            return item instanceof ArmorItem armorItem && armorItem.getEquipmentSlot() == EquipmentSlot.LEGS;
         }
     },
     BOOTS(Category.ARMOR, 2, 1) {
         @Override
         public boolean isItemThisType(Item item) {
-            return item instanceof ArmorItem armorItem && armorItem.getSlot() == EquipmentSlot.FEET;
+            return item instanceof ArmorItem armorItem && armorItem.getEquipmentSlot() == EquipmentSlot.FEET;
         }
     },
     SHIELD(Category.SHIELD, 4, 2) {

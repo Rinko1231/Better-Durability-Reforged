@@ -1,5 +1,5 @@
 {
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "package": "darkorg.betterdurability.mixin",
   "refmap": "betterdurability.refmap.json",
   "mixins": [

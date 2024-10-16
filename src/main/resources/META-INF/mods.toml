@@ -5,10 +5,10 @@ issueTrackerURL = "https://github.com/darkorg69/better-durability/issues"
 
 [[mods]]
 modId = "betterdurability"
-version = "${file.jarVersion}"
+version = "1.20.1-1.0.0"
 displayName = "Better Durability"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/better-durability"
 logoFile = "betterdurability.png"
 credits = "Thanks for this mod goes to Java and the Forge team."
-authors = "Darkorg"
-description = '''A mod to prevent your precious tools from breaking!'''
+authors = "Darkorg, TsXor"
+description = '''A mod to prevent your precious tools from breaking! Ported to 1.20.1 by Rinko1231'''

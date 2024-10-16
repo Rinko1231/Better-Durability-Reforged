@@ -18,4 +18,5 @@ public class BetterDurability {
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, ConfigurationHandler.SERVER_CONFIG);
         MinecraftForge.EVENT_BUS.register(this);
     }
+
 }
