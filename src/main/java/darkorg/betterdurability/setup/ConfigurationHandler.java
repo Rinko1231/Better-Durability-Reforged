@@ -3,8 +3,6 @@ package darkorg.betterdurability.setup;
 import com.google.common.collect.ImmutableList;
 import darkorg.betterdurability.BetterDurability;
 import darkorg.betterdurability.util.VanillaDamageableType;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -29,7 +27,9 @@ public class ConfigurationHandler {
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> DISABLED_TYPE_NAMES;
     public static final Set<VanillaDamageableType> DISABLED_TYPES = new HashSet<>();
     public static final ForgeConfigSpec.ConfigValue<List<? extends String>> BLACKLISTED_ITEM_IDS;
+    public static final ForgeConfigSpec.ConfigValue<List<? extends String>> WHITELISTED_ITEM_IDS;
     public static final Set<Item> BLACKLISTED_ITEMS = new HashSet<>();
+    public static final Set<Item> WHITELISTED_ITEMS = new HashSet<>();
 
     static {
         ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -41,6 +41,12 @@ public class ConfigurationHandler {
                 .defineList("disabledTypeNames", ImmutableList.of(), obj -> true);
         BLACKLISTED_ITEM_IDS = SERVER_BUILDER.comment("List of blacklisted items. Format is modId:itemId, modId can be omitted for vanilla.")
                 .defineList("blacklistedItemIds", ImmutableList.of(), obj -> true);
+        WHITELISTED_ITEM_IDS = SERVER_BUILDER
+                .comment("EXPERIMENTAL: Whitelist is intended for items whose types are not included above, such as knives from Farmer's Delight. ")
+                .comment("Items here will be forcefully protected as long as they are not blacklisted. Their durability will be set to 2 when being about to break.")
+                .comment("However, since only the click event is canceled, some illogical situations may occur.")
+                .comment("Format is modId:itemId, modId can be omitted for vanilla.")
+                .defineList("whitelistedItemIds", ImmutableList.of(), obj -> true);
         SERVER_BUILDER.pop();
 
         SERVER_CONFIG = SERVER_BUILDER.build();
@@ -52,6 +58,7 @@ public class ConfigurationHandler {
         loadEnumList(VanillaDamageableType.Category.class, DISABLED_CATEGORY_NAMES.get(), DISABLED_CATEGORIES);
         loadEnumList(VanillaDamageableType.class, DISABLED_TYPE_NAMES.get(), DISABLED_TYPES);
         loadItemIdList(BLACKLISTED_ITEM_IDS.get(), BLACKLISTED_ITEMS);
+        loadItemIdList(WHITELISTED_ITEM_IDS.get(), WHITELISTED_ITEMS);
     }
 
     @SubscribeEvent
@@ -60,6 +67,7 @@ public class ConfigurationHandler {
         reloadEnumList(VanillaDamageableType.Category.class, DISABLED_CATEGORY_NAMES.get(), DISABLED_CATEGORIES);
         reloadEnumList(VanillaDamageableType.class, DISABLED_TYPE_NAMES.get(), DISABLED_TYPES);
         reloadItemIdList(BLACKLISTED_ITEM_IDS.get(), BLACKLISTED_ITEMS);
+        reloadItemIdList(WHITELISTED_ITEM_IDS.get(), WHITELISTED_ITEMS);
     }
 
     private static void loadItemIdList(final List<? extends String> src, final Set<Item> dst) {

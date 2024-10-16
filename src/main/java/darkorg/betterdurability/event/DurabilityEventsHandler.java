@@ -19,9 +19,18 @@ public class DurabilityEventsHandler {
             || ConfigurationHandler.BLACKLISTED_ITEMS.contains(targetItem);
     }
 
+    public static boolean isWhitelisted(Item targetItem) {
+        return ConfigurationHandler.WHITELISTED_ITEMS.contains(targetItem)
+            && !ConfigurationHandler.BLACKLISTED_ITEMS.contains(targetItem);
+    }
+
     @SubscribeEvent
     public static void onItemBreaking(ItemDurabilityEvent.ItemBreaking event) {
         Item targetItem = event.targetStack.getItem();
+        if (targetItem.isDamageable(event.targetStack)&& isWhitelisted(targetItem)) {
+            event.reserveDurability = 2;
+            return;
+        }
         VanillaDamageableType itemType = VanillaDamageableType.getTypeByItem(targetItem);
         if (itemType != null && !isBlacklisted(targetItem, itemType)) {
             event.reserveDurability = itemType.protectValue;

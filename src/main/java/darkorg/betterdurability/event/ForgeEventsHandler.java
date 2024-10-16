@@ -1,6 +1,7 @@
 package darkorg.betterdurability.event;
 
 import darkorg.betterdurability.BetterDurability;
+import darkorg.betterdurability.util.VanillaDamageableType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -17,7 +18,7 @@ public class ForgeEventsHandler {
             if (!targetStack.isDamageableItem()) return;
             boolean canFunction = ItemDurabilityEvent.ItemUsage.check(targetStack,
                     ItemDurabilityEvent.ItemUsage.Type.TOOL_LEFT_CLICK_BLOCK);
-            if (!canFunction) { event.setCanceled(true); }
+            if (!canFunction || VanillaDamageableType.isItemKnownBrokenAnother(targetStack)) { event.setCanceled(true); }
         }
     }
 
@@ -27,7 +28,7 @@ public class ForgeEventsHandler {
         if (!targetStack.isDamageableItem()) return;
         boolean canFunction = ItemDurabilityEvent.ItemUsage.check(targetStack,
                 ItemDurabilityEvent.ItemUsage.Type.TOOL_LEFT_CLICK_ENTITY);
-        if (!canFunction) { event.setCanceled(true); }
+        if (!canFunction || VanillaDamageableType.isItemKnownBrokenAnother(targetStack)) { event.setCanceled(true); }
     }
 
     @SubscribeEvent
@@ -36,7 +37,7 @@ public class ForgeEventsHandler {
         if (!targetStack.isDamageableItem()) return;
         boolean canFunction = ItemDurabilityEvent.ItemUsage.check(targetStack,
                 ItemDurabilityEvent.ItemUsage.Type.TOOL_RIGHT_CLICK_ITEM);
-        if (!canFunction) { event.setCanceled(true); }
+        if (!canFunction || VanillaDamageableType.isItemKnownBrokenAnother(targetStack)) { event.setCanceled(true); }
     }
 
     @SubscribeEvent
@@ -45,7 +46,7 @@ public class ForgeEventsHandler {
         if (!targetStack.isDamageableItem()) return;
         boolean canFunction = ItemDurabilityEvent.ItemUsage.check(targetStack,
                 ItemDurabilityEvent.ItemUsage.Type.TOOL_RIGHT_CLICK_BLOCK);
-        if (!canFunction) { event.setCanceled(true); }
+        if (!canFunction || VanillaDamageableType.isItemKnownBrokenAnother(targetStack)) { event.setCanceled(true); }
     }
 
     @SubscribeEvent
@@ -54,7 +55,7 @@ public class ForgeEventsHandler {
         if (!targetStack.isDamageableItem()) return;
         boolean canFunction = ItemDurabilityEvent.ItemUsage.check(targetStack,
                 ItemDurabilityEvent.ItemUsage.Type.TOOL_RIGHT_CLICK_ENTITY);
-        if (!canFunction) { event.setCanceled(true); }
+        if (!canFunction || VanillaDamageableType.isItemKnownBrokenAnother(targetStack)) { event.setCanceled(true); }
     }
 
     @SubscribeEvent
@@ -63,6 +64,6 @@ public class ForgeEventsHandler {
         if (!targetStack.isDamageableItem()) return;
         boolean canFunction = ItemDurabilityEvent.ItemUsage.check(targetStack,
                 ItemDurabilityEvent.ItemUsage.Type.TOOL_RIGHT_CLICK_ENTITY);
-        if (!canFunction) { event.setCanceled(true); }
+        if (!canFunction || VanillaDamageableType.isItemKnownBrokenAnother(targetStack)) { event.setCanceled(true); }
     }
 }

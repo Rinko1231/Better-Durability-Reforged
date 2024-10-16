@@ -6,6 +6,8 @@ import net.minecraft.world.item.*;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 
+import static darkorg.betterdurability.event.DurabilityEventsHandler.isWhitelisted;
+
 public enum VanillaDamageableType {
     // brokenThreshold and protectValue here is somewhat arbitrary
     AXE(Category.TOOL, 2, 1) {
@@ -138,4 +140,16 @@ public enum VanillaDamageableType {
         }
         return false;
     }
+
+    public static boolean isItemKnownBrokenAnother (ItemStack stack) {
+        if (stack.isDamageableItem()) {
+            int durabilityLeft = stack.getMaxDamage() - stack.getDamageValue();
+            return isWhitelisted(stack.getItem()) && durabilityLeft <= 2;
+        }
+        return false;
+    }
+
+
+
+
 }

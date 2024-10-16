@@ -6,7 +6,7 @@ issueTrackerURL = "https://github.com/darkorg69/better-durability/issues"
 [[mods]]
 modId = "betterdurability"
 version = "1.20.1-1.0.0"
-displayName = "Better Durability"
+displayName = "Better Durability Reforged"
 displayURL = "https://www.curseforge.com/minecraft/mc-mods/better-durability"
 logoFile = "betterdurability.png"
 credits = "Thanks for this mod goes to Java and the Forge team."
